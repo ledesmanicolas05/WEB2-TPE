@@ -10,6 +10,7 @@ function sessionAuthMiddleware($res){
     }
     else {
         header('Location: ' . BASE_URL . 'showLogin');
+        die();
     }
 }
 ?>

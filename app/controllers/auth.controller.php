@@ -3,6 +3,10 @@ require_once './app/models/userModel.php';
 require_once './app/views/authView.php';
 
 class AuthController {
+
+    private $model;
+    private $view;
+
     public function __construct() {
         $this->model = new UserModel();
         $this->view = new AuthView();
@@ -27,7 +31,7 @@ class AuthController {
         // verificar que el usuario esta en la base de datos 
         $userFromDB = $this->model->getUserByUsername($email);
 
-        if(password_verify($password, $userFromDB->password)){
+        if($userFromDB && password_verify($password, $userFromDB->password)){
             session_start();
             //guardo en la sesion el id del usuario
             $_SESSION['ID_USER'] = $userFromDB->id;
@@ -40,5 +44,11 @@ class AuthController {
         else {
             return $this->view->showLogin('Credenciales Incorrectas');
         }
+    }
+
+    public function logOut(){
+        session_start();
+        session_destroy();
+        header('Location: ' . BASE_URL);
     }
 }

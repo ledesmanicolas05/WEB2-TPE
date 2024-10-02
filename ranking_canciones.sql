@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2024 a las 16:33:26
+-- Tiempo de generación: 02-10-2024 a las 22:46:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -159,6 +159,25 @@ INSERT INTO `canciones` (`id_cancion`, `titulo_cancion`, `fecha_lanzamiento`, `c
 (59, 'Poker Face', '2008-09-26', 3500000000, 32),
 (60, 'Sorry', '2015-10-22', 4200000000, 14);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `password` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `email`, `password`) VALUES
+(1, 'webadmin@gmail.com', '$2y$10$JZFamarDkYhqiJY9GM6SVus0WPuMvKrPVzCkdhrgurncwyBsHi5a6');
+
 --
 -- Índices para tablas volcadas
 --
@@ -177,6 +196,13 @@ ALTER TABLE `canciones`
   ADD KEY `id_artista` (`id_artista`);
 
 --
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -191,6 +217,12 @@ ALTER TABLE `artistas`
 --
 ALTER TABLE `canciones`
   MODIFY `id_cancion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

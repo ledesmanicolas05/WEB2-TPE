@@ -104,3 +104,5 @@ function showArtists(){
     </div>';
     require_once 'templates\layout\footer.php';
 }
+
+
