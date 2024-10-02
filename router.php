@@ -32,6 +32,9 @@ switch($params[0]){
     case 'song':
         showSong($params[1]);
         break;
+    case 'suggestions':
+        showSuggestion();
+        break;
     default:
         echo('404 Page not found');
         break;

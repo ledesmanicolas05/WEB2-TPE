@@ -102,3 +102,97 @@ function showArtists(){
     </div>';
     require_once 'templates\layout\footer.php';
 }
+
+function showSuggestion(){
+    require_once 'templates/layout/header.php';
+
+    echo '<h1 class="text-center">Sugerencias</h1>';
+    echo '<hr class="border border-danger border-2 opacity-50">';
+    echo '<p class="text-center fs-3">Aquí puedes dejar tus sugerencias sobre el top: añadir una nueva canción o un nuevo artista, eliminar una canción o modificar una existente.</p>';
+
+    echo '<div class="container">';
+    
+    echo renderAddSongForm();
+
+    echo '<hr class="border border-danger border-2 opacity-50">';
+
+    echo renderModifySongForm();
+
+    echo '</div>';
+
+    require_once 'templates/layout/footer.php';
+}
+
+function renderAddSongForm(){
+    return '
+        <h2 class="text-center">Agregar Canción y Artista</h2>
+        <form method="post" action="agregar_cancion.php">
+            <div class="mb-3">
+                <label for="artist_name" class="form-label">Nombre del Artista</label>
+                <input type="text" class="form-control" id="artist_name" name="artist_name" aria-describedby="artistHelp">
+                <div id="artistHelp" class="form-text">Asegúrate que el artista no esté ya en el top.</div>
+            </div>
+            <div class="mb-3">
+                <label for="song_name" class="form-label">Canción</label>
+                <input type="text" class="form-control" id="song_name" name="song_name">
+            </div>
+            <div class="mb-3">
+                <label for="mod_views" class="form-label">Cantidad de reproducciones</label>
+                <input type="number" class="form-control" id="mod_views" name="views" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="mod_date" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="mod_date" name="date" readonly>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+    ';
+}
+
+function renderModifySongForm(){
+    $options = getSongOptions();
+    return '
+        <h2 class="text-center">Modificar Canción Existente</h2>
+        <form id="modificar-cancion" method="post" action="modificar_cancion.php">
+            <div class="mb-3">
+                <label for="songSelect" class="form-label">Canción a modificar</label>
+                <select class="form-control" id="songSelect" name="song_id">
+                    <option value="" disabled selected>Selecciona una canción</option>
+                    ' . $options . '
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="mod_name_song" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="mod_name_song" name="song_name">
+            </div>
+            <div class="mb-3">
+                <label for="mod_views" class="form-label">Cantidad de reproducciones</label>
+                <input type="number" class="form-control" id="mod_views" name="views">
+            </div>
+            <div class="mb-3">
+                <label for="mod_date" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="mod_date" name="date">
+            </div>
+            <button type="submit" class="btn btn-primary">Modificar</button>
+        </form>
+    ';
+}
+
+function getSongOptions(){
+    $conn = new mysqli('localhost', 'root', '', 'ranking_canciones');
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    $sql = "SELECT id_cancion, titulo_cancion FROM canciones";
+    $result = $conn->query($sql);
+    
+    $options = "";
+    while ($row = $result->fetch_assoc()) {
+        $options .= "<option value='" . $row['id_cancion'] . "'>" . $row['titulo_cancion'] . "</option>";
+    }
+    
+    $conn->close();
+    return $options;
+}
+?> 
