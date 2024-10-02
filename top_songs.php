@@ -5,7 +5,7 @@ function showTop(){
 
     $db = new PDO('mysql:host=localhost;dbname=ranking_canciones;charset=utf8', 'root', '');
 
-    $query = $db->prepare( "select * from canciones");
+    $query = $db->prepare( "select * from canciones ORDER BY `canciones`.`cantidad_reproducciones` DESC");
     $query->execute();
     // Obtenemos los datos para generar el HTML //
     $canciones = $query->fetchAll(PDO::FETCH_OBJ);
@@ -17,18 +17,20 @@ function showTop(){
         <td>FECHA DE LANZAMIENTO</td>
         <td>REPRODUCCIONES</td>
         <td>ARTISTA</td>';
+        $contador = 1;
         
     foreach($canciones as $cancion) {
         $query = $db->prepare('SELECT * FROM artistas WHERE id_artista = ?');
         $query->execute([$cancion->id_artista]);
         $artista = $query->fetch(PDO::FETCH_OBJ);
         echo '<tr>';
-        echo '<td>' . $cancion->id_cancion . '</td>' .
+        echo '<td>' . $contador . '</td>' .
         '<td>' . '<a href="song/' .  $cancion->id_cancion . '">'. $cancion->titulo_cancion . '</a>' . '</td>'. 
         '<td>' . $cancion->fecha_lanzamiento . '</td>' . 
         '<td>' . $cancion->cantidad_reproducciones . '</td>' . 
         '<td>' . '<a href="artist' . "/" .  $artista->id_artista . '">'. $artista->nombre_artista . '</a>' . '</td>';
         echo '</tr>';
+        $contador++;
     }
     echo "</table>";
   
