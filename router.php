@@ -42,6 +42,8 @@ switch($params[0]){
         sessionAuthMiddleware($res);
         showSong($params[1]);
         break;
+    case 'suggestions':
+        showSuggestion();
     case 'showLogin':
         $controller = new AuthController();
         $controller->showLogin();
