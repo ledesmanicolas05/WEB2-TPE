@@ -19,11 +19,9 @@ $params = explode('/', $action);
 
 switch($params[0]){
     case 'top-songs':
-        sessionAuthMiddleware($res);
         showTop();
         break;
     case 'artist':
-        sessionAuthMiddleware($res);
         if(isset($params[1])){
             showArtistByID($params[1]);
         }else{
@@ -31,19 +29,18 @@ switch($params[0]){
         }
     break;
     case 'artists': 
-        sessionAuthMiddleware($res);
         showArtists();
         break;
     case 'about':
-        sessionAuthMiddleware($res);
         showAbout();
         break;
     case 'song':
-        sessionAuthMiddleware($res);
         showSong($params[1]);
         break;
     case 'suggestions':
+        sessionAuthMiddleware($res);
         showSuggestion();
+        break;
     case 'showLogin':
         $controller = new AuthController();
         $controller->showLogin();
