@@ -1,0 +1,29 @@
+<?php
+require 'templates/layout/header.php';
+?>
+    <table class="table table-md">
+        <thead>
+            <tr>
+                <td>TOP</td>
+                <td>TÍTULO</td>
+                <td>FECHA DE LANZAMIENTO</td>
+                <td>REPRODUCCIONES</td>
+                <td>ARTISTA</td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $contador = 1; ?>
+            <?php foreach ($canciones as $cancion): ?>
+                <tr>
+                    <td><?= $contador ?></td>
+                    <td><a href="song/<?= $cancion->id_cancion ?>"><?= $cancion->titulo_cancion ?></a></td>
+                    <td><?= $cancion->fecha_lanzamiento ?></td>
+                    <td><?= $cancion->cantidad_reproducciones ?></td>
+                    <td><a href="artist/<?= $cancion->artista->id_artista ?>"><?= $cancion->artista->nombre_artista ?></a></td>
+                </tr>
+                <?php $contador++; ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    
+<?php require 'templates/layout/footer.php'; ?>

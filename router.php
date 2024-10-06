@@ -1,7 +1,8 @@
 <?php
 require_once 'libs/response.php';
 require_once 'app/middlewares/session.auth.middleware.php';
-require_once 'top_songs.php';
+require_once 'app/controllers/top.controller.php';
+//require_once 'top_songs.php'; 
 require_once 'app/controllers/auth.controller.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -19,31 +20,37 @@ $params = explode('/', $action);
 
 switch($params[0]){
     case 'top-songs':
-        sessionAuthMiddleware($res);
-        showTop();
+        $controller = new TopController();
+        $controller->showTop();
         break;
     case 'artist':
-        sessionAuthMiddleware($res);
+        $controller = new TopController();
         if(isset($params[1])){
-            showArtistByID($params[1]);
+            $controller->showArtist($params[1]);
         }else{
-            showTop();
+            $controller->showTop();
         }
     break;
     case 'artists': 
-        sessionAuthMiddleware($res);
-        showArtists();
+        $controller = new TopController();
+        $controller->showArtists();
         break;
     case 'about':
-        sessionAuthMiddleware($res);
-        showAbout();
+        $controller = new TopController();
+            $controller->showAbout();
         break;
     case 'song':
-        sessionAuthMiddleware($res);
-        showSong($params[1]);
+        $controller = new TopController();
+        if(isset($params[1])){
+            $controller->showSong($params[1]);
+        }else{
+            $controller->showTop();
+        }
         break;
     case 'suggestions':
+        sessionAuthMiddleware($res);
         showSuggestion();
+        break;
     case 'showLogin':
         $controller = new AuthController();
         $controller->showLogin();
