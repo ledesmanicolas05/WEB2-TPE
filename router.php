@@ -49,7 +49,8 @@ switch($params[0]){
         break;
     case 'suggestions':
         sessionAuthMiddleware($res);
-        showSuggestion();
+        $controller = new TopController();
+        $controller->showSuggestion();
         break;
     case 'showLogin':
         $controller = new AuthController();
@@ -62,6 +63,36 @@ switch($params[0]){
     case 'logOut' : 
         $controller = new AuthController();
         $controller->logOut();
+        break;
+    case 'newSong':
+        sessionAuthMiddleware($res);
+        $controller = new TopController();
+        $controller->addSong();
+        break;
+    case 'updateSong':
+        sessionAuthMiddleware($res);
+        $controller = new TopController();
+        $controller->modifySong();
+        break;
+    case 'deleteSong':
+        sessionAuthMiddleware($res);
+        $controller = new TopController();
+        $controller->deleteSong();
+        break;
+    case 'newArtist':
+        sessionAuthMiddleware($res);
+        $controller = new TopController();
+        $controller->addArtist();
+        break;
+    case 'updateArtist':
+        sessionAuthMiddleware($res);
+        $controller = new TopController();
+        $controller->modifyArtist();
+        break;
+    case 'deleteArtist':
+        sessionAuthMiddleware($res);
+        $controller = new TopController();
+        $controller->deleteArtist();
         break;
     default:
         echo('404 Page not found');

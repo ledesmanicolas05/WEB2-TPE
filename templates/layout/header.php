@@ -16,9 +16,9 @@
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="<?php echo BASE_URL; ?>top-songs" class="nav-link px-2 link-secondary">GLOBAL TOP</a></li>
-        <li><a href="<?php echo BASE_URL; ?>artists" class="nav-link px-2">Artists</a></li>
+        <li><a href="<?php echo BASE_URL; ?>artists" class="nav-link px-2">Artistas</a></li>
         <li><a href="#" class="nav-link px-2">trending</a></li>
-        <li><a href="<?php echo BASE_URL; ?>suggestions" class="nav-link px-2">suggestions</a></li>
+        <li><a href="<?php echo BASE_URL; ?>suggestions" class="nav-link px-2">Modificaciones</a></li>
         <li><a href="<?php echo BASE_URL; ?>about" class="nav-link px-2">About</a></li>
       </ul>
 

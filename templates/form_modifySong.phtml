@@ -1,0 +1,23 @@
+<h2 class="text-center">Modificar Canción Existente</h2>
+        <form id="modificar-cancion" method="post" action="updateSong">
+            <div class="mb-3">
+                <label for="songSelect" class="form-label">Canción a modificar</label>
+                <select class="form-control" id="songSelect" name="song_id">
+                    <option value="" disabled selected>Selecciona una canción</option>
+                    <?= $options ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="mod_name_song" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="mod_name_song" name="song_name">
+            </div>
+            <div class="mb-3">
+                <label for="mod_views" class="form-label">Cantidad de reproducciones</label>
+                <input type="number" class="form-control" id="mod_views" name="views">
+            </div>
+            <div class="mb-3">
+                <label for="mod_date" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="mod_date" name="date">
+            </div>
+            <button type="submit" class="btn btn-primary">Modificar</button>
+        </form>

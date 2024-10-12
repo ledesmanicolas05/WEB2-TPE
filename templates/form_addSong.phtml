@@ -1,0 +1,25 @@
+
+
+<h2 class="text-center">Agregar Canción</h2>
+        <form method="post" action="newSong">
+            <div class="mb-3">
+                <label for="artist_name" class="form-label">Nombre del Artista</label>
+                <select class="form-control" id="artistSelect" name="artist_id">
+                    <option value="" disabled selected>Seleccione su artista</option>
+                    <?= $optionsArtists ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="song_name" class="form-label">Canción</label>
+                <input type="text" class="form-control" id="song_name" name="song_name">
+            </div>
+            <div class="mb-3">
+                <label for="views" class="form-label">Cantidad de reproducciones</label>
+                <input type="number" class="form-control" id="views" name="views">
+            </div>
+            <div class="mb-3">
+                <label for="date" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="date" name="date">
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>

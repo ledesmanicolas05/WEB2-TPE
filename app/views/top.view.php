@@ -18,4 +18,10 @@ class TopView {
     public function showArtists($artistas){
         require 'templates/showAllArtists.phtml';
     }
+    public function showSuggestion($options, $optionsArtists){
+        require 'templates/suggestion.phtml';
+    }
+    public function showError($error){
+        require 'templates/error.phtml';
+    }
 }

@@ -1,0 +1,19 @@
+<h2 class="text-center">Modificar Artista Existente</h2>
+        <form id="modificar-artista" method="post" action="updateArtist">
+        <div class="mb-3">
+                <label for="artistSelect" class="form-label">Nombre del Artista</label>
+                <select class="form-control" id="artistSelect" name="artist_id">
+                    <option value="" disabled selected>Seleccione el artista</option>
+                    <?= $optionsArtists ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="mod_name_artist" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="mod_name_artist" name="artist_name">
+            </div>
+            <div class="mb-3">
+                <label for="nationality" class="form-label">Nacionalidad</label>
+                <input type="text" class="form-control" id="nacionality" name="nationality">
+            </div>
+            <button type="submit" class="btn btn-primary">Modificar</button>
+        </form>
