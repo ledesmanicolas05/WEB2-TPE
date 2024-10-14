@@ -13,13 +13,13 @@ require 'templates/layout/header.php';
         </thead>
         <tbody>
             <?php $contador = 1; ?>
-            <?php foreach ($canciones as $cancion): ?>
+            <?php foreach ($songs as $song): ?>
                 <tr>
                     <td><?= $contador ?></td>
-                    <td><a href="song/<?= $cancion->id_cancion ?>"><?= $cancion->titulo_cancion ?></a></td>
-                    <td><?= $cancion->fecha_lanzamiento ?></td>
-                    <td><?= $cancion->cantidad_reproducciones ?></td>
-                    <td><a href="artist/<?= $cancion->artista->id_artista ?>"><?= $cancion->artista->nombre_artista ?></a></td>
+                    <td><a href="song/<?= $song->id_song ?>"><?= $song->song_name ?></a></td>
+                    <td><?= $song->release_date ?></td>
+                    <td><?= $song->views ?></td>
+                    <td><a href="artist/<?= $song->artist->id_artist ?>"><?= $song->artist->artist_name ?></a></td>
                 </tr>
                 <?php $contador++; ?>
             <?php endforeach; ?>

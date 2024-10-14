@@ -28,12 +28,12 @@ class AuthController {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        // verificar que el usuario esta en la base de datos 
+        // verificar que el user esta en la base de datos 
         $userFromDB = $this->model->getUserByUsername($email);
 
         if($userFromDB && password_verify($password, $userFromDB->password)){
             session_start();
-            //guardo en la sesion el id del usuario
+            //guardo en la sesion el id del user
             $_SESSION['ID_USER'] = $userFromDB->id;
             $_SESSION['EMAIL_USER'] = $userFromDB->email;
             $_SESSION['LAST_ACTIVITY'] = time();

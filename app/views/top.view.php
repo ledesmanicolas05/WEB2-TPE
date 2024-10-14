@@ -1,13 +1,13 @@
 <?php
 class TopView {
-    public function showTop($canciones){
+    public function showTop($songs){
         require 'templates/showTop.phtml';
 }
-    public function showArtist($artista){
+    public function showArtist($artist){
         require 'templates/showArtist.phtml';
     }
 
-    public function showSong($cancion){
+    public function showSong($song){
         require 'templates/showSong.phtml';
     }
 
@@ -15,7 +15,7 @@ class TopView {
         require 'templates/showAbout.phtml';
     }
 
-    public function showArtists($artistas){
+    public function showArtists($artists){
         require 'templates/showAllArtists.phtml';
     }
     public function showSuggestion($options, $optionsArtists){

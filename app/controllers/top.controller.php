@@ -16,19 +16,19 @@ class TopController {
     }
 
     public function showTop() {
-        $canciones = $this->songModel->getAllSongs();
+        $songs = $this->songModel->getAllSongs();
 
-        foreach ($canciones as $cancion) {
-            $cancion->artista = $this->artistModel->getArtistById($cancion->id_artista);
+        foreach ($songs as $cancion) {
+            $cancion->artist = $this->artistModel->getArtistById($cancion->id_artist);
         }
 
-        return $this->view->showTop($canciones);
+        return $this->view->showTop($songs);
     }
 
     public function showArtist($id){
-        $artista = $this->artistModel->getArtistById($id);
+        $artist = $this->artistModel->getArtistById($id);
 
-        return $this->view->showArtist($artista);
+        return $this->view->showArtist($artist);
     }
 
     public function showSong($id){
@@ -42,9 +42,9 @@ class TopController {
     }
 
     public function showArtists(){
-        $artistas = $this->artistModel->getAllArtists();
+        $artists = $this->artistModel->getAllArtists();
 
-        return $this->view->showArtists($artistas);
+        return $this->view->showArtists($artists);
     }
 
     public function showSuggestion(){
@@ -121,10 +121,10 @@ class TopController {
         
         
         if (!isset($_POST['artist_name']) || empty($_POST['artist_name'])) {
-            return $this->view->showError('Falta completar el nombre del artista');
+            return $this->view->showError('Falta completar el nombre del artist');
         }
         if (!isset($_POST['nationality']) || empty($_POST['nationality'])) {
-            return $this->view->showError('Falta completar la nacionalidad del artista');
+            return $this->view->showError('Falta completar la nacionalidad del artist');
         }
 
         $artist_name = $_POST['artist_name'];
@@ -132,19 +132,23 @@ class TopController {
 
         $id = $this->artistModel->insertArtist($artist_name, $nationality);
 
+        if ($id = "duplicate") {
+            return $this->view->showError('Su artist ya esta en el top');
+        }
+
         header('Location: ' . BASE_URL);
     }
 
     public function modifyArtist() {
 
         if (!isset($_POST['artist_id']) || empty($_POST['artist_id'])) {
-            return $this->view->showError('Falta seleccionar el ID del artista');
+            return $this->view->showError('Falta seleccionar el ID del artist');
         }
         if (!isset($_POST['artist_name']) || empty($_POST['artist_name'])) {
-            return $this->view->showError('Falta completar el nombre del artista');
+            return $this->view->showError('Falta completar el nombre del artist');
         }
         if (!isset($_POST['nationality']) || empty($_POST['nationality'])) {
-            return $this->view->showError('Falta completar la nacionalidad del artista');
+            return $this->view->showError('Falta completar la nacionalidad del artist');
         }
 
         $artist_id = $_POST['artist_id'];
@@ -158,12 +162,13 @@ class TopController {
 
     public function deleteArtist() {
         if (!isset($_POST['artist_id']) || empty($_POST['artist_id'])) {
-            return $this->view->showError('Falta seleccionar el ID del artista');
+            return $this->view->showError('Falta seleccionar el ID del artist');
         }
 
         $artist_id = $_POST['artist_id'];
 
         $id = $this->artistModel->eraseArtist($artist_id);
+        
 
         header('Location: ' . BASE_URL);
     }

@@ -4,39 +4,46 @@ class SongModel {
     private $db;
 
     public function __construct() {
-        $this->db = new PDO('mysql:host=localhost;dbname=ranking_canciones;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;dbname=top_songs;charset=utf8', 'root', '');
     }
 
     public function getAllSongs() {
-        $query = $this->db->prepare("SELECT * FROM canciones ORDER BY cantidad_reproducciones DESC");
+        $query = $this->db->prepare("SELECT * FROM songs ORDER BY views DESC");
         $query->execute();
-        // Obtenemos los datos para generar el HTML //
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function getSongById($id) {
-        $query = $this->db->prepare("SELECT * FROM canciones WHERE id_cancion = ?");
+        $query = $this->db->prepare("SELECT * FROM songs WHERE id_song = ?");
         $query->execute([$id]);
-        $cancion = $query->fetch(PDO::FETCH_OBJ);
+        $song = $query->fetch(PDO::FETCH_OBJ);
 
-        return $cancion;
+        return $song;
+    }
+
+    public function getSongByArtist($id){
+        $query = $this->db->prepare("SELECT * FROM songs WHERE id_artist = ?");
+        $query->execute([$id]);
+        $songartists = $query->fetchAll(PDO::FETCH_OBJ);
+
+        return $songartists;
     }
 
     public function getSongsOptions(){
-        $query = $this->db->prepare("SELECT id_cancion, titulo_cancion FROM canciones");
+        $query = $this->db->prepare("SELECT id_song, song_name FROM songs");
         $query->execute();
 
 
         $options = "";
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-            $options .= "<option value='" . $row['id_cancion'] . "'>" . $row['titulo_cancion'] . "</option>";
+            $options .= "<option value='" . $row['id_song'] . "'>" . $row['song_name'] . "</option>";
         }
 
         return $options;
     }
 
     public function insertSong($song_name, $date, $views, $artist_id,) { 
-        $query = $this->db->prepare('INSERT INTO canciones(titulo_cancion, fecha_lanzamiento, cantidad_reproducciones, id_artista) VALUES (?, ?, ?, ?)');
+        $query = $this->db->prepare('INSERT INTO songs(song_name, release_date, views, id_artist) VALUES (?, ?, ?, ?)');
         $query->execute([$song_name, $date, $views, $artist_id]);
     
         $id = $this->db->lastInsertId();
@@ -45,12 +52,12 @@ class SongModel {
     }
 
     public function updateSong($song_id, $song_name, $date, $views) {        
-        $query = $this->db->prepare('UPDATE canciones SET titulo_cancion = ?, fecha_lanzamiento = ?, cantidad_reproducciones = ? WHERE id_cancion = ?');
+        $query = $this->db->prepare('UPDATE songs SET song_name = ?, release_date = ?, views = ? WHERE id_song = ?');
         $query->execute([$song_name, $date, $views, $song_id]);
     }
 
     public function eraseSong($id) {
-        $query = $this->db->prepare('DELETE FROM canciones WHERE id_cancion = ?');
+        $query = $this->db->prepare('DELETE FROM songs WHERE id_song = ?');
         $query->execute([$id]);
     }
 

@@ -2,7 +2,6 @@
 require_once 'libs/response.php';
 require_once 'app/middlewares/session.auth.middleware.php';
 require_once 'app/controllers/top.controller.php';
-//require_once 'top_songs.php'; 
 require_once 'app/controllers/auth.controller.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
