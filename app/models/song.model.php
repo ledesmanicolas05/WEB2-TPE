@@ -42,18 +42,18 @@ class SongModel {
         return $options;
     }
 
-    public function insertSong($song_name, $date, $views, $artist_id,) { 
-        $query = $this->db->prepare('INSERT INTO songs(song_name, release_date, views, id_artist) VALUES (?, ?, ?, ?)');
-        $query->execute([$song_name, $date, $views, $artist_id]);
+    public function insertSong($song_name, $date, $views, $artist_id, $lyrics) { 
+        $query = $this->db->prepare('INSERT INTO songs(song_name, release_date, views, id_artist, lyrics_song) VALUES (?, ?, ?, ?, ?)');
+        $query->execute([$song_name, $date, $views, $artist_id, $lyrics]);
     
         $id = $this->db->lastInsertId();
     
         return $id;
     }
 
-    public function updateSong($song_id, $song_name, $date, $views) {        
-        $query = $this->db->prepare('UPDATE songs SET song_name = ?, release_date = ?, views = ? WHERE id_song = ?');
-        $query->execute([$song_name, $date, $views, $song_id]);
+    public function updateSong($song_id, $song_name, $date, $views, $lyrics) {        
+        $query = $this->db->prepare('UPDATE songs SET song_name = ?, release_date = ?, views = ?, lyrics_song = ? WHERE id_song = ?');
+        $query->execute([$song_name, $date, $views, $song_id, $lyrics]);
     }
 
     public function eraseSong($id) {

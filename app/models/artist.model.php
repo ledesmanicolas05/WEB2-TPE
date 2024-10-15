@@ -37,7 +37,7 @@ class ArtistModel {
         return $options;
     }
 
-    public function insertArtist($artist_name, $nationality) { 
+    public function insertArtist($artist_name, $nationality, $img_artist) { 
         $query = $this->db->prepare('SELECT * FROM artists WHERE artist_name = ?');
         $query->execute([$artist_name]);
         $existing_artist = $query->fetch(PDO::FETCH_OBJ);
@@ -45,8 +45,8 @@ class ArtistModel {
         if ($existing_artist) {
             return  $id = "duplicate";
         } else {
-            $query = $this->db->prepare('INSERT INTO artists(artist_name, artist_nationality) VALUES (?, ?)');
-            $query->execute([$artist_name, $nationality]);
+            $query = $this->db->prepare('INSERT INTO artists(artist_name, artist_nationality, img_artist) VALUES (?, ?, ?)');
+            $query->execute([$artist_name, $nationality, $img_artist]);
     
             $id = $this->db->lastInsertId();
         
@@ -54,9 +54,9 @@ class ArtistModel {
         }
     }
 
-    public function updateArtist($artist_id, $artist_name, $nationality) {        
-        $query = $this->db->prepare('UPDATE artists SET artist_name = ?, artist_nationality = ? WHERE id_artist = ?');
-        $query->execute([$artist_name, $nationality, $artist_id]);
+    public function updateArtist($artist_id, $artist_name, $nationality, $img_artist) {        
+        $query = $this->db->prepare('UPDATE artists SET artist_name = ?, artist_nationality = ?, img_artist = ? WHERE id_artist = ?');
+        $query->execute([$artist_name, $nationality, $img_artist, $artist_id]);
     }
 
     public function eraseArtist($id) {

@@ -3,7 +3,7 @@ class TopView {
     public function showTop($songs){
         require 'templates/showTop.phtml';
 }
-    public function showArtist($artist){
+    public function showArtist($artist, $songs){
         require 'templates/showArtist.phtml';
     }
 

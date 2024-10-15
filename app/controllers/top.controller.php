@@ -18,8 +18,8 @@ class TopController {
     public function showTop() {
         $songs = $this->songModel->getAllSongs();
 
-        foreach ($songs as $cancion) {
-            $cancion->artist = $this->artistModel->getArtistById($cancion->id_artist);
+        foreach ($songs as $song) {
+            $song->artist = $this->artistModel->getArtistById($song->id_artist);
         }
 
         return $this->view->showTop($songs);
@@ -28,13 +28,15 @@ class TopController {
     public function showArtist($id){
         $artist = $this->artistModel->getArtistById($id);
 
-        return $this->view->showArtist($artist);
+        $songs = $this->songModel->getSongByArtist($id);
+
+        return $this->view->showArtist($artist, $songs);
     }
 
     public function showSong($id){
-        $cancion = $this->songModel->getSongById($id);
+        $song = $this->songModel->getSongById($id);
 
-        return $this->view->showSong($cancion);
+        return $this->view->showSong($song);
     }
 
     public function showAbout(){
@@ -71,12 +73,16 @@ class TopController {
             return $this->view->showError('Falta completar la cantidad de reproducciones');
         }
 
+        if (!isset($_POST['lyrics']) || empty($_POST['lyrics'])) {
+            return $this->view->showError('Falta completar las lyrics de la canción');
+        }
+
         $song_name = $_POST['song_name'];
         $date = $_POST['date'];
         $views = $_POST['views'];
         $artist_id = $_POST['artist_id'];
-
-        $id = $this->songModel->insertSong($song_name, $date, $views, $artist_id);
+        $lyrics = $_POST['lyrics'];
+        $id = $this->songModel->insertSong($song_name, $date, $views, $artist_id, $lyrics);
 
         header('Location: ' . BASE_URL);
     }
@@ -95,16 +101,21 @@ class TopController {
         if (!isset($_POST['views']) || empty($_POST['views'])) {
             return $this->view->showError('Falta completar la cantidad de reproducciones');
         }
+        if (!isset($_POST['lyrics']) || empty($_POST['lyrics'])) {
+            return $this->view->showError('Falta completar las lyrics de la canción');
+        }
     
         $song_id = $_POST['song_id'];
         $song_name = $_POST['song_name'];
         $date = $_POST['date'];
         $views = $_POST['views'];
+        $lyrics = $_POST['lyrics'];
     
-        $id = $this->songModel->updateSong($song_id, $song_name, $date, $views);
+        $id = $this->songModel->updateSong($song_id, $song_name, $date, $views, $lyrics);
     
         header('Location: ' . BASE_URL);
     }
+
     public function deleteSong() {
         if (!isset($_POST['song_id']) || empty($_POST['song_id'])) {
             return $this->view->showError('Falta completar el ID de la canción');
@@ -126,11 +137,15 @@ class TopController {
         if (!isset($_POST['nationality']) || empty($_POST['nationality'])) {
             return $this->view->showError('Falta completar la nacionalidad del artist');
         }
+        if (!isset($_POST['img_artist']) || empty($_POST['img_artist'])) {
+            return $this->view->showError('Falta completar la imagen de su artista');
+        }
 
         $artist_name = $_POST['artist_name'];
         $nationality = $_POST['nationality'];
+        $img_artist = $_POST['img_artist'];
 
-        $id = $this->artistModel->insertArtist($artist_name, $nationality);
+        $id = $this->artistModel->insertArtist($artist_name, $nationality, $img_artist);
 
         if ($id = "duplicate") {
             return $this->view->showError('Su artist ya esta en el top');
@@ -150,12 +165,16 @@ class TopController {
         if (!isset($_POST['nationality']) || empty($_POST['nationality'])) {
             return $this->view->showError('Falta completar la nacionalidad del artist');
         }
+        if (!isset($_POST['img_artist']) || empty($_POST['img_artist'])) {
+            return $this->view->showError('Falta completar la imagen de su artista');
+        }
 
         $artist_id = $_POST['artist_id'];
         $artist_name = $_POST['artist_name'];
         $nationality = $_POST['nationality'];
+        $img_artist = $_POST['img_artist'];
     
-        $id = $this->artistModel->updateArtist($artist_id, $artist_name, $nationality);
+        $id = $this->artistModel->updateArtist($artist_id, $artist_name, $nationality, $img_artist);
     
         header('Location: ' . BASE_URL);
     }

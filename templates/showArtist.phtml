@@ -1,4 +1,27 @@
 <?php require 'templates/layout/header.php'; ?>
 
-<li> <?= $artist->artist_name ?> <?= $artist->artist_nationality ?> </li>
+<img src="<?= $artist->img_artist ?>" class="mx-auto d-block img-fluid img-thumbnail m-3" alt="<?= $artist->artist_name ?>">
+
+<h1 class="text-center m-3"><?= $artist->artist_name ?> (<?= $artist->artist_nationality ?>)</h1>
+
+<h3 class="text-center m-3"><?= $artist->description ?></h3>
+
+<div class="container">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <?php foreach($songs as $index => $song): ?> 
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse<?= $index ?>" aria-expanded="false" aria-controls="panelsStayOpen-collapse<?= $index ?>">
+                        <?= htmlspecialchars($song->song_name) ?>
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapse<?= $index ?>" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <strong><?= nl2br(htmlspecialchars($song->lyrics_song)) ?></strong>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
 <?php require 'templates/layout/footer.php'; ?>
