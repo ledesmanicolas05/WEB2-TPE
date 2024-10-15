@@ -1,6 +1,6 @@
 <?php require 'templates/layout/header.php'; ?>
 
-<h1> <?= $song->song_name ?> </h1>
+<h1 class="text-center my-5"> <?= $song->song_name ?> </h1>
 
-<strong><?= nl2br(htmlspecialchars($song->lyrics_song)) ?></strong>
+<p class="text-center"><?= nl2br(htmlspecialchars($song->lyrics_song)) ?></p>
 <?php require 'templates/layout/footer.php'; ?>

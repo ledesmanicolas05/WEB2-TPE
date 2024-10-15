@@ -1,29 +1,30 @@
 <?php
 require 'templates/layout/header.php';
 ?>
+<div class="container text-center">
     <table class="table table-md">
         <thead>
             <tr>
-                <td>TOP</td>
-                <td>TÍTULO</td>
-                <td>FECHA DE LANZAMIENTO</td>
-                <td>REPRODUCCIONES</td>
-                <td>ARTISTA</td>
+                <td >TOP</td>
+                <td >TÍTULO</td>
+                <td >FECHA DE LANZAMIENTO</td>
+                <td >REPRODUCCIONES</td>
+                <td >ARTISTA</td>
             </tr>
         </thead>
         <tbody>
             <?php $contador = 1; ?>
             <?php foreach ($songs as $song): ?>
                 <tr>
-                    <td><?= $contador ?></td>
-                    <td><a href="song/<?= $song->id_song ?>"><?= $song->song_name ?></a></td>
-                    <td><?= $song->release_date ?></td>
-                    <td><?= $song->views ?></td>
-                    <td><a href="artist/<?= $song->artist->id_artist ?>"><?= $song->artist->artist_name ?></a></td>
+                    <td ><?= $contador ?></td>
+                    <td ><a href="song/<?= $song->id_song ?>"><?= $song->song_name ?></a></td>
+                    <td ><?= $song->release_date ?></td>
+                    <td ><?= $song->views ?></td>
+                    <td ><a href="artist/<?= $song->artist->id_artist ?>"><?= $song->artist->artist_name ?></a></td>
                 </tr>
                 <?php $contador++; ?>
             <?php endforeach; ?>
         </tbody>
     </table>
-    
+</div>
 <?php require 'templates/layout/footer.php'; ?>

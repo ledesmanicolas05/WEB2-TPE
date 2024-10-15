@@ -6,7 +6,7 @@
 
 <h3 class="text-center m-3"><?= $artist->description ?></h3>
 
-<div class="container">
+<div class="container my-5">
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <?php foreach($songs as $index => $song): ?> 
             <div class="accordion-item">
@@ -16,7 +16,7 @@
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapse<?= $index ?>" class="accordion-collapse collapse">
-                    <div class="accordion-body">
+                    <div class="accordion-body text-center">
                         <strong><?= nl2br(htmlspecialchars($song->lyrics_song)) ?></strong>
                     </div>
                 </div>
