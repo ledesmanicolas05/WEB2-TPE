@@ -1,6 +1,6 @@
 <?php require 'templates/layout/header.php'; ?>
 
-<li> <?= $song->song_name ?> </li>
+<h1> <?= $song->song_name ?> </h1>
 
-<p>LYRICS DE LA cancion XD</p>
+<strong><?= nl2br(htmlspecialchars($song->lyrics_song)) ?></strong>
 <?php require 'templates/layout/footer.php'; ?>
