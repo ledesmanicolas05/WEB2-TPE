@@ -1,14 +1,18 @@
 <?php
 
 require_once 'app/models/song.model.php';
+require_once 'config.php'; // Asegúrate de incluir el archivo de configuración
 
 class ArtistModel {
     private $db;
     private $songModel;
 
     public function __construct() {
-        $this->db = new PDO('mysql:host=localhost;dbname=top_songs;charset=utf8', 'root', '');
-        $this->songModel = new SongModel();
+        $this->db = new PDO(
+            "mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DB . ";charset=utf8", 
+            MYSQL_USER, 
+            MYSQL_PASS
+        );
     }
 
     public function getAllArtists() {

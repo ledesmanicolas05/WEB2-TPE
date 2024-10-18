@@ -34,8 +34,9 @@
           <hr class="my-1">
           <!-- Copyright -->
           <div class="text-center p-3">
-            © 2020 Copyright:
-            <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            © A&N Copyright:
+            <a class="text-body" href="https://github.com/ledesmanicolas05">Nicolas Ledesma</a>
+            <a class="text-body" href="https://github.com/AbrilCrivaro">Abril Crivaro</a>
           </div>
           <!-- Copyright -->
     </footer>
