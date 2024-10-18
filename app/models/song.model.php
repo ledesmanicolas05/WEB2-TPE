@@ -1,17 +1,8 @@
 <?php 
 
-require_once 'config.php'; // Asegúrate de incluir el archivo de configuración
+require_once 'app/models/model.php';
 
-class SongModel {
-    private $db;
-
-    public function __construct() {
-        $this->db = new PDO(
-            "mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DB . ";charset=utf8", 
-            MYSQL_USER, 
-            MYSQL_PASS
-        );
-    }
+class SongModel extends Model{
 
     public function getAllSongs() {
         $query = $this->db->prepare("SELECT * FROM songs ORDER BY views DESC");

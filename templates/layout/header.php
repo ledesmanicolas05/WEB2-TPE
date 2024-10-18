@@ -22,6 +22,11 @@
         <li><a href="<?php echo BASE_URL; ?>about" class="nav-link px-2">Nosotros</a></li>
       </ul>
 
+      <div class="user">
+      <?php if($this->user) : ?>
+        <span><?= $this->user->email ?></span>
+        <?php endif; ?>
+      </div>
       <div class="col-md-3 text-end">
         <a href="<?php echo BASE_URL; ?>showLogin" class="btn btn-outline-primary me-2">Login</a>
         <a href="<?php echo BASE_URL; ?>logOut" class="btn btn-outline-primary me-2">Sing-up</a>

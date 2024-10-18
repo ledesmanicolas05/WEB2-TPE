@@ -8,11 +8,11 @@ class TopController {
     private $artistModel;
     private $view;
 
-    public function __construct()
+    public function __construct($res)
     {
         $this->songModel = new SongModel();
         $this->artistModel = new ArtistModel();
-        $this->view = new TopView();
+        $this->view = new TopView($res->user);
     }
 
     public function showTop() {

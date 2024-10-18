@@ -13,32 +13,28 @@ class AuthController {
     }
 
     public function showLogin(){
-        // muestro el formulario de login 
         return $this->view->showLogin();
     }
 
     public function login(){
-        if(!isset($_POST['email']) || empty($_POST['email'])) {
+        if(!isset($_POST['user']) || empty($_POST['user'])) {
             return $this->view->showLogin('Falta completar el nombre de usuario');
         }
         if(!isset($_POST['password']) || empty($_POST['password'])) {
             return $this->view->showLogin('Falta completar la contraseña');
         }
 
-        $email = $_POST['email'];
+        $user = $_POST['user'];
         $password = $_POST['password'];
 
-        // verificar que el user esta en la base de datos 
-        $userFromDB = $this->model->getUserByUsername($email);
+        $userFromDB = $this->model->getUserByUsername($user);
 
         if($userFromDB && password_verify($password, $userFromDB->password)){
             session_start();
-            //guardo en la sesion el id del user
             $_SESSION['ID_USER'] = $userFromDB->id;
             $_SESSION['EMAIL_USER'] = $userFromDB->email;
             $_SESSION['LAST_ACTIVITY'] = time();
 
-            //redirijo al home
             header('Location: ' . BASE_URL);
         }
         else {

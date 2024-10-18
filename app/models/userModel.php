@@ -5,11 +5,7 @@ class userModel {
     private $db;
 
     public function __construct() {
-        $this->db = new PDO(
-            "mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DB . ";charset=utf8", 
-            MYSQL_USER, 
-            MYSQL_PASS
-        );
+        $this->db = new PDO('mysql:host=localhost;dbname=top_songs;charset=utf8', 'root', '');
     }
 
     public function getUserByUsername($email){

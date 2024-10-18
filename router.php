@@ -4,9 +4,6 @@ require_once 'app/middlewares/session.auth.middleware.php';
 require_once 'app/controllers/top.controller.php';
 require_once 'app/controllers/auth.controller.php';
 require_once 'config.php';
-require_once 'app/models/model.php'; 
-
-$model = new Model();
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -23,11 +20,13 @@ $params = explode('/', $action);
 
 switch($params[0]){
     case 'top-songs':
-        $controller = new TopController();
+        session($res);
+        $controller = new TopController($res);
         $controller->showTop();
         break;
     case 'artist':
-        $controller = new TopController();
+        session($res);
+        $controller = new TopController($res);
         if(isset($params[1])){
             $controller->showArtist($params[1]);
         }else{
@@ -35,15 +34,18 @@ switch($params[0]){
         }
     break;
     case 'artists': 
-        $controller = new TopController();
+        session($res);
+        $controller = new TopController($res);
         $controller->showArtists();
         break;
     case 'about':
-        $controller = new TopController();
+        session($res);
+        $controller = new TopController($res);
             $controller->showAbout();
         break;
     case 'song':
-        $controller = new TopController();
+        session($res);
+        $controller = new TopController($res);
         if(isset($params[1])){
             $controller->showSong($params[1]);
         }else{
@@ -52,7 +54,7 @@ switch($params[0]){
         break;
     case 'suggestions':
         sessionAuthMiddleware($res);
-        $controller = new TopController();
+        $controller = new TopController($res);
         $controller->showSuggestion();
         break;
     case 'showLogin':
@@ -69,32 +71,32 @@ switch($params[0]){
         break;
     case 'newSong':
         sessionAuthMiddleware($res);
-        $controller = new TopController();
+        $controller = new TopController($res);
         $controller->addSong();
         break;
     case 'updateSong':
         sessionAuthMiddleware($res);
-        $controller = new TopController();
+        $controller = new TopController($res);
         $controller->modifySong();
         break;
     case 'deleteSong':
         sessionAuthMiddleware($res);
-        $controller = new TopController();
+        $controller = new TopController($res);
         $controller->deleteSong();
         break;
     case 'newArtist':
         sessionAuthMiddleware($res);
-        $controller = new TopController();
+        $controller = new TopController($res);
         $controller->addArtist();
         break;
     case 'updateArtist':
         sessionAuthMiddleware($res);
-        $controller = new TopController();
+        $controller = new TopController($res);
         $controller->modifyArtist();
         break;
     case 'deleteArtist':
         sessionAuthMiddleware($res);
-        $controller = new TopController();
+        $controller = new TopController($res);
         $controller->deleteArtist();
         break;
     default:

@@ -1,5 +1,13 @@
 <?php
 class TopView {
+
+    public $user = null;
+
+    public function __construct($user)
+    {
+        $this->user = $user;
+    }
+
     public function showTop($songs){
         require 'templates/showTop.phtml';
 }

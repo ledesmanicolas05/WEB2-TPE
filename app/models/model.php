@@ -180,7 +180,6 @@ class Model {
             END;
 
             $this->db->query($sql);
-            echo "Tablas creadas exitosamente.<br>";
         }
     }
 }
