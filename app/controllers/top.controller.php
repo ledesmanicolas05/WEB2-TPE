@@ -132,23 +132,27 @@ class TopController {
         
         
         if (!isset($_POST['artist_name']) || empty($_POST['artist_name'])) {
-            return $this->view->showError('Falta completar el nombre del artist');
+            return $this->view->showError('Falta completar el nombre del artista');
         }
         if (!isset($_POST['nationality']) || empty($_POST['nationality'])) {
-            return $this->view->showError('Falta completar la nacionalidad del artist');
+            return $this->view->showError('Falta completar la nacionalidad del artista');
         }
         if (!isset($_POST['img_artist']) || empty($_POST['img_artist'])) {
             return $this->view->showError('Falta completar la imagen de su artista');
+        }
+        if (!isset($_POST['description']) || empty($_POST['description'])) {
+            return $this->view->showError('Falta la descripcion de su artista');
         }
 
         $artist_name = $_POST['artist_name'];
         $nationality = $_POST['nationality'];
         $img_artist = $_POST['img_artist'];
+        $description = $_POST['description'];
 
-        $id = $this->artistModel->insertArtist($artist_name, $nationality, $img_artist);
+        $id = $this->artistModel->insertArtist($artist_name, $nationality, $img_artist, $description);
 
-        if ($id = "duplicate") {
-            return $this->view->showError('Su artist ya esta en el top');
+        if ($id == "duplicate") {
+            return $this->view->showError('Su artista ya esta en el top');
         }
 
         header('Location: ' . BASE_URL);
@@ -157,31 +161,35 @@ class TopController {
     public function modifyArtist() {
 
         if (!isset($_POST['artist_id']) || empty($_POST['artist_id'])) {
-            return $this->view->showError('Falta seleccionar el ID del artist');
+            return $this->view->showError('Falta seleccionar el ID del artista');
         }
         if (!isset($_POST['artist_name']) || empty($_POST['artist_name'])) {
-            return $this->view->showError('Falta completar el nombre del artist');
+            return $this->view->showError('Falta completar el nombre del artista');
         }
         if (!isset($_POST['nationality']) || empty($_POST['nationality'])) {
-            return $this->view->showError('Falta completar la nacionalidad del artist');
+            return $this->view->showError('Falta completar la nacionalidad del artista');
         }
         if (!isset($_POST['img_artist']) || empty($_POST['img_artist'])) {
             return $this->view->showError('Falta completar la imagen de su artista');
+        }
+        if (!isset($_POST['description']) || empty($_POST['description'])) {
+            return $this->view->showError('Falta la descripcion de su artista');
         }
 
         $artist_id = $_POST['artist_id'];
         $artist_name = $_POST['artist_name'];
         $nationality = $_POST['nationality'];
         $img_artist = $_POST['img_artist'];
+        $description = $_POST['description'];
     
-        $id = $this->artistModel->updateArtist($artist_id, $artist_name, $nationality, $img_artist);
+        $id = $this->artistModel->updateArtist($artist_id, $artist_name, $nationality, $img_artist, $description);
     
         header('Location: ' . BASE_URL);
     }
 
     public function deleteArtist() {
         if (!isset($_POST['artist_id']) || empty($_POST['artist_id'])) {
-            return $this->view->showError('Falta seleccionar el ID del artist');
+            return $this->view->showError('Falta seleccionar el ID del artista');
         }
 
         $artist_id = $_POST['artist_id'];

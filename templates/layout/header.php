@@ -17,20 +17,21 @@
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="<?php echo BASE_URL; ?>top-songs" class="nav-link px-2">GLOBAL TOP</a></li>
-        <li><a href="<?php echo BASE_URL; ?>artists" class="nav-link px-2">artistas</a></li>
+        <li><a href="<?php echo BASE_URL; ?>artists" class="nav-link px-2">Artistas</a></li>
         <li><a href="<?php echo BASE_URL; ?>suggestions" class="nav-link px-2">Modificaciones</a></li>
         <li><a href="<?php echo BASE_URL; ?>about" class="nav-link px-2">Nosotros</a></li>
       </ul>
 
-      <div class="user">
-      <?php if($this->user) : ?>
-        <span><?= $this->user->email ?></span>
-        <?php endif; ?>
-      </div>
       <div class="col-md-3 text-end">
+    <?php if($this->user) : ?>
+        <!-- Si el usuario está logueado, muestra solo el botón de Logout -->
+        <span class="mx-5"><?= $this->user->email ?></span>
+        <a href="<?php echo BASE_URL; ?>logOut" class="btn btn-outline-primary me-2">Log-out</a>
+    <?php else : ?>
+        <!-- Si no está logueado, muestra solo el botón de Login -->
         <a href="<?php echo BASE_URL; ?>showLogin" class="btn btn-outline-primary me-2">Login</a>
-        <a href="<?php echo BASE_URL; ?>logOut" class="btn btn-outline-primary me-2">Sing-up</a>
-      </div>
+    <?php endif; ?>
+</div>
     </header>
   </div>
 <body>

@@ -15,10 +15,37 @@ if (!empty($_GET['action'])){
     $action = 'top-songs'; // acción por defecto si no envían
 }
 
+//                          TABLA DE RUTEO
+//======================================================================================
+//           URL                                LLAMADO
+//======================================================================================
+// top-songs                       TopController->showTop();
+// artist/:id                      TopController->showArtist($params[1]);
+// artists                         TopController->showArtists();
+// about                           TopController->showAbout();
+// song/:id                        TopController->showSong($params[1]);
+// suggestions                     TopController->showSuggestion();
+//======================================================================================
+// showLogin                       AuthController->showLogin();
+// login                           AuthController->login();
+// logOut                          AuthController->logOut();
+//======================================================================================
+// newSong                         TopController->addSong();
+// updateSong                      TopController->modifySong();
+// deleteSong                      TopController->deleteSong();
+//======================================================================================
+// newArtist                       TopController->addArtist();
+// updateArtist                    TopController->modifyArtist();
+// deleteArtist                    TopController->deleteArtist();
+//======================================================================================
+
 
 $params = explode('/', $action);
 
 switch($params[0]){
+
+    // Paginas del TOP
+
     case 'top-songs':
         session($res);
         $controller = new TopController($res);
@@ -57,6 +84,9 @@ switch($params[0]){
         $controller = new TopController($res);
         $controller->showSuggestion();
         break;
+
+    // Login de la pagina
+
     case 'showLogin':
         $controller = new AuthController();
         $controller->showLogin();
@@ -69,6 +99,9 @@ switch($params[0]){
         $controller = new AuthController();
         $controller->logOut();
         break;
+
+    // Modificaciones de los artistas y las cancioness
+
     case 'newSong':
         sessionAuthMiddleware($res);
         $controller = new TopController($res);
@@ -99,6 +132,9 @@ switch($params[0]){
         $controller = new TopController($res);
         $controller->deleteArtist();
         break;
+
+    // Errores
+
     default:
         echo('404 Page not found');
         break;

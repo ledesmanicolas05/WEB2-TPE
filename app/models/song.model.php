@@ -50,7 +50,7 @@ class SongModel extends Model{
 
     public function updateSong($song_id, $song_name, $date, $views, $lyrics) {        
         $query = $this->db->prepare('UPDATE songs SET song_name = ?, release_date = ?, views = ?, lyrics_song = ? WHERE id_song = ?');
-        $query->execute([$song_name, $date, $views, $song_id, $lyrics]);
+        $query->execute([$song_name, $date, $views, $lyrics , $song_id]);
     }
 
     public function eraseSong($id) {
