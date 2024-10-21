@@ -71,10 +71,10 @@ y esta es una de las paginas del top:
  
 ## Caracteristicas tecnicas:
  
--El sitio está desarrollado utilizando el patrón MVC.
--Las vistas están implementadas mediante plantillas PHTML.
--Las rutas del sitio son semánticas y fáciles de navegar.
--El código incluye protección contra inyecciones SQL mediante prepared statements de PDO.
+- El sitio está desarrollado utilizando el patrón MVC.
+- Las vistas están implementadas mediante plantillas PHTML.
+- Las rutas del sitio son semánticas y fáciles de navegar.
+- El código incluye protección contra inyecciones SQL mediante prepared statements de PDO.
 
 
 
