@@ -41,9 +41,9 @@ El sitio incluye un sistema de autenticación que permite que solo los usuarios 
 - `description`: breve descripcion del artista
 
 ### La tabla `users` contiene:
-- `id_user`: clave primaria (autoincremental)
-- `username`: nombre de usuario
-- `password_hash`: contraseña almacenada de forma segura (hash)
+- `id`: clave primaria (autoincremental)
+- `email`: nombre de usuario
+- `password`: contraseña almacenada de forma segura (hash)
 
 ![image](https://github.com/user-attachments/assets/4710ef99-5197-4b8a-8cf3-b42a0c03d616)
 
